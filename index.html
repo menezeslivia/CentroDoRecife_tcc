@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>O centro do Recife e suas artérias — Reportagem especial</title>
+<meta name="description" content="Reportagem multimídia de conclusão de curso sobre as ruas do Centro do Recife: Aurora, Imperatriz Teresa Cristina, Palma, Guia e Calçadas.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+<style>
+
+:root {
+  --papel:        #f0e4c8;
+  --papel-escuro: #e3d3ae;
+  --tinta:        #2b1d12;
+  --sepia:        #6b4a2e;
+  --ferrugem:     #8a3b1f;
+  --linha:        #8c6e4b;
+
+  --f-maquina: 'Special Elite', 'Courier Prime', 'Courier New', monospace;
+  --f-texto:   'Lora', Georgia, 'Times New Roman', serif;
+
+  --largura-texto: 40rem;
+  --largura-max:   68rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
+body {
+  margin: 0;
+  color: var(--tinta);
+  font-family: var(--f-texto);
+  font-size: clamp(1.05rem, 0.98rem + 0.3vw, 1.2rem);
+  line-height: 1.75;
+  background-color: var(--papel);
+
+  background-image:
+    radial-gradient(ellipse at center, transparent 55%, rgba(107,74,46,.28) 100%),
+    radial-gradient(circle at 15% 20%, rgba(138,59,31,.07), transparent 40%),
+    radial-gradient(circle at 85% 70%, rgba(107,74,46,.09), transparent 45%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .25  0 0 0 0 .13  0 0 0 .22 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  background-attachment: fixed;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--ferrugem); }
+:focus-visible { outline: 3px solid var(--ferrugem); outline-offset: 3px; }
+
+#progresso {
+  position: fixed; top: 0; left: 0; height: 4px; width: 0;
+  background: var(--ferrugem); z-index: 60;
+}
+
+.filete-duplo { border: 0; border-top: 3px double var(--tinta); margin: 1.2rem 0; }
+.filete-fino  { border: 0; border-top: 1px solid var(--linha); margin: 1rem 0; }
+.ornamento {
+  text-align: center; color: var(--sepia);
+  font-family: var(--f-maquina); letter-spacing: .6em;
+  margin: 2.5rem 0; user-select: none; opacity: .85;
+}
+
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+.gravura {
+  display: block; width: 100%; height: auto; margin: 0 auto;
+  color: var(--sepia); fill: none; stroke: currentColor;
+  stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round;
+}
+.g-faixa    { max-width: 38rem; stroke-width: 3.2; }
+.g-ponte    { max-width: 20rem; }
+.g-sombrinha{ max-width: 4.2rem; }
+.g-bonde    { max-width: 9.5rem; }
+.g-jangada  { max-width: 7rem; }
+.gravura-rodape { color: var(--papel); margin-bottom: 2rem; }
+.capa .gravura { margin: 0 auto 2rem; }
+
+.capa {
+  max-width: var(--largura-max);
+  margin: 0 auto;
+  padding: 5rem 1.25rem 2rem;
+  text-align: center;
+}
+.cabecalho-jornal {
+  font-family: var(--f-maquina);
+  font-size: clamp(2rem, 7vw, 4.6rem);
+  line-height: 1;
+  margin: 0;
+  letter-spacing: .02em;
+}
+.dados-edicao {
+  display: flex; justify-content: space-between; gap: .5rem 1rem; flex-wrap: wrap;
+  font-family: var(--f-maquina); font-size: .85rem; color: var(--sepia);
+  border-top: 1px solid var(--tinta); border-bottom: 1px solid var(--tinta);
+  padding: .45rem 0; margin: 1rem 0 2.5rem;
+}
+.capa h1 {
+  font-family: var(--f-maquina);
+  font-weight: 400;
+  font-size: clamp(2.3rem, 7vw, 5rem);
+  line-height: 1.05;
+  margin: 0 auto 1rem;
+  max-width: 18ch;
+  text-wrap: balance;
+}
+.creditos {
+  font-family: var(--f-maquina); font-size: .92rem; color: var(--sepia);
+  line-height: 1.6; margin: 0;
+}
+.creditos strong { color: var(--tinta); font-weight: 400; }
+.foto-capa { margin: 2.5rem 0 0; }
+.foto-capa img { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+
+main { padding-bottom: 2rem; }
+.secao { max-width: var(--largura-max); margin: 0 auto; padding: 3.5rem 1.25rem; }
+.secao-cabecalho { max-width: var(--largura-texto); margin: 0 auto 2rem; }
+.capitulo {
+  font-family: var(--f-maquina); color: var(--ferrugem);
+  font-size: .95rem; margin: 0 0 .4rem;
+}
+.secao h2 {
+  font-family: var(--f-maquina); font-weight: 400;
+  font-size: clamp(1.9rem, 4.6vw, 3.1rem);
+  line-height: 1.1; margin: 0 0 .6rem; text-wrap: balance;
+}
+.subtitulo { font-style: italic; color: var(--sepia); margin: 0; font-size: 1.1em; }
+
+.texto { max-width: var(--largura-texto); margin: 0 auto; }
+.texto p { margin: 0 0 1.3em; hyphens: auto; }
+
+.texto p.abertura::first-letter {
+  float: left; font-family: var(--f-maquina);
+  font-size: 4.6em; line-height: .8; padding: .08em .1em 0 0; color: var(--ferrugem);
+}
+
+.texto h3 {
+  font-family: var(--f-maquina); font-weight: 400; font-size: 1.45rem;
+  margin: 2.2rem 0 .6rem; border-bottom: 1px dotted var(--linha); padding-bottom: .3rem;
+}
+
+.colunas { max-width: var(--largura-max); margin: 2rem auto; }
+.colunas p { margin: 0 0 1.2em; text-align: justify; hyphens: auto; font-size: .98em; }
+@media (min-width: 52rem) {
+  .colunas { column-count: 2; column-gap: 3rem; column-rule: 2px dotted var(--linha); }
+}
+@media (min-width: 72rem) { .colunas.tres { column-count: 3; column-gap: 2.5rem; } }
+
+.citacao {
+  max-width: 46rem; margin: 3rem auto; padding: 1.6rem 1rem;
+  border-top: 3px double var(--tinta); border-bottom: 3px double var(--tinta);
+  text-align: center;
+}
+.citacao blockquote {
+  margin: 0; font-family: var(--f-maquina);
+  font-size: clamp(1.4rem, 3.4vw, 2.1rem); line-height: 1.3; text-wrap: balance;
+}
+.citacao figcaption { margin-top: .8rem; font-style: italic; color: var(--sepia); font-size: .95rem; }
+
+.recorte {
+  max-width: var(--largura-texto); margin: 2.5rem auto; padding: 1.2rem 1.4rem;
+  background: var(--papel-escuro); border: 2px dashed var(--linha);
+  font-size: .95em; line-height: 1.6;
+}
+.recorte h3 { font-family: var(--f-maquina); font-weight: 400; margin: 0 0 .5rem; font-size: 1.25rem; }
+.recorte p { margin: 0; }
+
+figure.foto { margin: 2.5rem auto; }
+figure.foto img {
+  width: 100%; object-fit: cover; aspect-ratio: 3/2;
+  filter: sepia(.55) contrast(1.05) saturate(.8);
+  border: 1px solid var(--linha); padding: 6px; background: #f8f0dc;
+}
+figure.foto figcaption {
+  font-size: .85rem; line-height: 1.45; color: var(--sepia);
+  margin-top: .6rem; padding-top: .4rem; border-top: 1px solid var(--linha);
+}
+figure.foto figcaption b { font-family: var(--f-maquina); font-weight: 400; color: var(--tinta); }
+.foto-larga { max-width: var(--largura-max); }
+.foto-media { max-width: 50rem; }
+@media (min-width: 52rem) {
+  .foto-lateral { float: right; width: 18rem; margin: .4rem -6rem 1rem 1.6rem; }
+}
+
+.galeria {
+  max-width: var(--largura-max); margin: 2.5rem auto;
+  display: grid; gap: 1.2rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+}
+.galeria figure.foto { margin: 0; }
+
+.midia {
+  max-width: 50rem; margin: 2.5rem auto; aspect-ratio: 16/9;
+  display: grid; place-items: center; text-align: center; padding: 1rem;
+  border: 2px dotted var(--linha); background: var(--papel-escuro);
+  font-family: var(--f-maquina); color: var(--sepia);
+}
+
+footer {
+  background: var(--tinta); color: var(--papel);
+  padding: 3rem 1.25rem; text-align: center; font-size: .95rem;
+}
+footer h2 { font-family: var(--f-maquina); font-weight: 400; font-size: 1.6rem; margin: 0 0 1rem; }
+footer p { max-width: 38rem; margin: 0 auto .8rem; }
+footer .filete-fino { border-color: #7d6446; max-width: 38rem; margin: 1.5rem auto; }
+
+.btn-sumario {
+  position: fixed; top: .9rem; right: .9rem; z-index: 70;
+  font-family: var(--f-maquina); font-size: .95rem; cursor: pointer;
+  background: var(--tinta); color: var(--papel);
+  border: 2px solid var(--papel); outline: 1px solid var(--tinta);
+  padding: .55rem 1rem; border-radius: 2px;
+  box-shadow: 3px 3px 0 rgba(43,29,18,.35);
+}
+.btn-sumario:hover { background: var(--ferrugem); }
+
+.painel {
+  position: fixed; inset: 0 0 0 auto; z-index: 80;
+  width: min(22rem, 88vw); padding: 4.5rem 1.5rem 2rem; overflow-y: auto;
+  background: var(--papel); border-left: 3px double var(--tinta);
+  box-shadow: -8px 0 30px rgba(43,29,18,.3);
+  transform: translateX(105%); transition: transform .3s ease;
+  visibility: hidden;
+}
+.painel.aberto { transform: none; visibility: visible; }
+.painel h2 { font-family: var(--f-maquina); font-weight: 400; font-size: 1.5rem; margin: 0; }
+.painel ol { list-style: none; margin: 0; padding: 0; }
+.painel li { border-bottom: 1px dotted var(--linha); }
+.painel li a {
+  display: block; padding: .8rem .3rem; text-decoration: none; color: var(--tinta);
+  font-family: var(--f-maquina); line-height: 1.3;
+}
+.painel li a small { display: block; font-family: var(--f-texto); font-style: italic; color: var(--sepia); }
+.painel li a:hover, .painel li a.ativo { color: var(--ferrugem); background: rgba(138,59,31,.08); }
+.painel li a.ativo { border-left: 4px solid var(--ferrugem); padding-left: .7rem; }
+.fechar {
+  position: absolute; top: .9rem; right: .9rem; cursor: pointer;
+  font-family: var(--f-maquina); background: none; border: 2px solid var(--tinta);
+  color: var(--tinta); padding: .45rem .8rem;
+}
+.veu {
+  position: fixed; inset: 0; z-index: 75; background: rgba(43,29,18,.55);
+  opacity: 0; pointer-events: none; transition: opacity .3s;
+}
+.veu.aberto { opacity: 1; pointer-events: auto; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .painel, .veu { transition: none; }
+}
+@media print { .btn-sumario, .painel, .veu, #progresso { display: none; } }
+</style>
+</head>
+
+<body>
+<div id="progresso" aria-hidden="true"></div>
+
+<svg class="sprite" aria-hidden="true" focusable="false">
+
+  <symbol id="g-casa1" viewBox="0 0 90 90">
+    <path d="M4 90V34h82v56M0 34l45-20 45 20"/>
+    <path d="M16 46h12v20H16zM39 46h12v20H39zM62 46h12v20H62zM36 90V72h18v18"/>
+  </symbol>
+
+  <symbol id="g-casa2" viewBox="0 0 90 130">
+    <path d="M4 130V8h82v122M0 8h90M0 14h90"/>
+    <path d="M14 26h12v22H14zM39 26h12v22H39zM64 26h12v22H64zM14 62h12v22H14zM39 62h12v22H39zM64 62h12v22H64zM36 130v-26h18v26"/>
+  </symbol>
+
+  <symbol id="g-igreja" viewBox="0 0 220 130">
+    <path d="M10 130V66h200v64M10 130V28h45v102M165 130V28h45v102"/>
+    <path d="M5 28h55L32.5 6zM160 28h55L187.5 6zM55 66l55-30 55 30M110 36V22M104 28h12"/>
+    <path d="M96 130v-26a14 14 0 0 1 28 0v26M26 62V48a6 6 0 0 1 12 0v14zM177 62V48a6 6 0 0 1 12 0v14zM26 92V80a6 6 0 0 1 12 0v12zM177 92V80a6 6 0 0 1 12 0v12z"/>
+    <circle cx="110" cy="58" r="7"/>
+  </symbol>
+
+  <symbol id="g-torre" viewBox="0 0 60 140">
+    <path d="M8 140V50h44v90M6 50a24 22 0 0 1 48 0M30 28V8M30 10l12 4-12 4M8 90h44M8 96h44"/>
+    <circle cx="30" cy="72" r="10"/>
+    <path d="M30 72v-7M30 72h6M22 128v-24a8 8 0 0 1 16 0v24z"/>
+  </symbol>
+
+  <symbol id="g-panorama" viewBox="0 0 1200 150">
+    <path d="M0 144H1200M250 22q6-6 12 0q6-6 12 0M300 8q5-5 10 0q5-5 10 0M960 14q6-6 12 0q6-6 12 0"/>
+    <use href="#g-casa1" x="10" y="54" width="90" height="90"/>
+    <use href="#g-casa2" x="106" y="14" width="90" height="130"/>
+    <use href="#g-casa1" x="202" y="54" width="90" height="90"/>
+    <use href="#g-casa2" x="298" y="29" width="80" height="115"/>
+    <use href="#g-igreja" x="400" y="14" width="220" height="130"/>
+    <use href="#g-casa2" x="632" y="14" width="90" height="130"/>
+    <use href="#g-casa1" x="728" y="54" width="90" height="90"/>
+    <use href="#g-torre" x="830" y="4" width="60" height="140"/>
+    <use href="#g-casa1" x="904" y="54" width="90" height="90"/>
+    <use href="#g-casa2" x="1000" y="14" width="90" height="130"/>
+    <use href="#g-casa1" x="1096" y="54" width="90" height="90"/>
+  </symbol>
+
+  <symbol id="g-ponte" viewBox="0 0 600 130">
+    <path d="M0 44H600M0 38H600M0 32H600"/>
+    <path d="M20 100V68a45 26 0 0 1 90 0v32M130 100V68a45 26 0 0 1 90 0v32M240 100V68a45 26 0 0 1 90 0v32M350 100V68a45 26 0 0 1 90 0v32M460 100V68a45 26 0 0 1 90 0v32"/>
+    <path d="M130 32V14M124 14h12l-6-8zM350 32V14M344 14h12l-6-8z"/>
+    <path d="M0 108q15-8 30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0"/>
+    <path d="M15 120q15-8 30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0"/>
+  </symbol>
+
+  <symbol id="g-sombrinha" viewBox="0 0 120 120">
+    <path d="M10 62a50 50 0 0 1 100 0M10 62q12.5 12 25 0t25 0t25 0t25 0M60 12V4M60 12L35 62M60 12V62M60 12L85 62M60 12L22 56M60 12L98 56M60 62V100a8 8 0 0 0 16 0"/>
+    <circle cx="38" cy="38" r="2"/><circle cx="82" cy="38" r="2"/><circle cx="60" cy="30" r="2"/>
+  </symbol>
+
+  <symbol id="g-bonde" viewBox="0 0 240 100">
+    <path d="M20 20H220V76H20zM14 20h212M20 64H220M130 14L178 2M0 92H240"/>
+    <path d="M34 32h30v22H34zM76 32h30v22H76zM118 32h30v22H118zM160 32h30v22H160zM198 28h16v48"/>
+    <circle cx="52" cy="82" r="8"/><circle cx="188" cy="82" r="8"/>
+  </symbol>
+
+  <symbol id="g-jangada" viewBox="0 0 200 140">
+    <path d="M100 8V104M100 14L168 90H100zM100 34L150 90M100 54L138 90M100 72L126 90"/>
+    <path d="M40 104H170M30 112H176M40 120H166"/>
+    <path d="M10 132q10-6 20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0"/>
+  </symbol>
+</svg>
+
+<button class="btn-sumario" id="abrirSumario" aria-expanded="false" aria-controls="sumario">☰ Sumário</button>
+<div class="veu" id="veu"></div>
+<nav class="painel" id="sumario" aria-label="Sumário da reportagem">
+  <button class="fechar" id="fecharSumario" aria-label="Fechar sumário">Fechar</button>
+  <h2>Nesta edição</h2>
+  <hr class="filete-duplo">
+  <ol>
+    <li><a href="#topo">Capa<small>O centro do Recife e suas artérias</small></a></li>
+    <li><a href="#apresentacao">Apresentação<small>Um coração de séculos de histórias</small></a></li>
+    <li><a href="#capitulo-1">1. Rua da Aurora<small>Bairro da Boa Vista</small></a></li>
+    <li><a href="#capitulo-2">2. Rua da Imperatriz Teresa Cristina<small>Bairro da Boa Vista</small></a></li>
+    <li><a href="#capitulo-3">3. Rua da Palma<small>Bairro de Santo Antônio</small></a></li>
+    <li><a href="#capitulo-4">4. Rua da Guia<small>Bairro do Recife</small></a></li>
+    <li><a href="#capitulo-5">5. Rua das Calçadas<small>Bairro de São José</small></a></li>
+    <li><a href="#creditos">Créditos<small>Ficha técnica</small></a></li>
+  </ol>
+</nav>
+
+<header class="capa" id="topo">
+  <p class="cabecalho-jornal">Memória de Papel</p>
+  <div class="dados-edicao">
+    <span>Recife, Pernambuco</span>
+    <span>Edição especial — Trabalho de Conclusão de Curso</span>
+    <span>Ano 2026</span>
+  </div>
+
+  <svg class="gravura g-faixa" viewBox="0 0 1200 150" aria-hidden="true"><use href="#g-panorama"/></svg>
+
+  <h1>O centro do Recife e suas artérias</h1>
+
+  <hr class="filete-fino">
+
+  <p class="creditos">
+    <strong>Texto e apuração:</strong> Nome do(a) Autor(a)<br>
+    <strong>Fotografia:</strong> Nome do(a) Fotógrafo(a) &nbsp;|&nbsp; <strong>Orientação:</strong> Prof.(a) Nome
+  </p>
+  <hr class="filete-fino">
+
+  <figure class="foto foto-capa">
+
+    <img src="imagens/capa.jpg" alt="Descrição da imagem de capa: vista de uma rua do Centro do Recife com sobrados antigos" width="1600" height="900">
+    <figcaption><b>Foto:</b> Descrição da imagem. Local, data. Crédito: Nome do fotógrafo.</figcaption>
+  </figure>
+</header>
+
+<main>
+
+<section class="secao" id="apresentacao">
+  <div class="secao-cabecalho">
+    <p class="capitulo">Apresentação</p>
+    <h2>O centro do Recife e suas artérias</h2>
+    <hr class="filete-duplo">
+  </div>
+
+  <div class="texto">
+    <p class="abertura">O centro do Recife é conhecido como o coração da cidade e guarda, em cada uma de suas ruas, ou artérias, séculos de histórias e mudanças. Desde o século XVI, a região se expandiu entre mercados públicos, igrejas, faculdades, teatros, cinemas e edifícios históricos. Nas últimas décadas, a região passou por um rápido processo de esvaziamento impulsionado pela ascensão dos shoppings centers, do comércio online e pelo desvio de investimentos para outras regiões da cidade. Dessa forma, as vivências relacionadas à região são plurais e envolvem aspectos econômicos, sociais, afetivos e culturais.</p>
+    <p>As narrativas reunidas nestas reportagens foram construídas a partir de relatos de personagens, entrevistas com especialistas e imagens que visam resgatar as características marcantes de cada rua, buscando compreender quais experiências e aspectos marcantes se relacionam à suas existências. São elas: Rua da Aurora e Rua da Imperatriz Teresa Cristina, no bairro da Boa Vista; Rua da Palma, no bairro de Santo Antônio; Rua das Calçadas, no bairro de São José; e Rua da Guia, no Bairro do Recife.</p>
+  </div>
+</section>
+
+<div class="ornamento" aria-hidden="true">✦ ✦ ✦</div>
+
+<section class="secao" id="capitulo-1">
+  <div class="secao-cabecalho">
+    <p class="capitulo">Reportagem 1</p>
+    <h2>Rua da Aurora</h2>
+    <p class="subtitulo">Bairro da Boa Vista</p>
+    <hr class="filete-duplo">
+  </div>
+
+  <div class="texto">
+    <p class="abertura">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+    <figure class="foto foto-lateral">
+      <img src="imagens/foto-01.jpg" alt="Descrição: vista da Rua da Aurora, no bairro da Boa Vista" width="600" height="400">
+      <figcaption><b>Legenda:</b> Lorem ipsum dolor sit amet. Crédito: Nome.</figcaption>
+    </figure>
+
+    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+  </div>
+
+  <figure class="citacao">
+    <blockquote>“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.”</blockquote>
+    <figcaption>Nome do entrevistado, profissão ou relação com a rua</figcaption>
+  </figure>
+
+  <div class="texto">
+    <h3>Intertítulo da seção</h3>
+    <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+    <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+  </div>
+</section>
+
+<div class="ornamento" aria-hidden="true">
+
+  <svg class="gravura g-ponte" viewBox="0 0 600 130"><use href="#g-ponte"/></svg>
+</div>
+
+<section class="secao" id="capitulo-2">
+  <div class="secao-cabecalho">
+    <p class="capitulo">Reportagem 2</p>
+    <h2>Rua da Imperatriz Teresa Cristina</h2>
+    <p class="subtitulo">Bairro da Boa Vista</p>
+    <hr class="filete-duplo">
+  </div>
+
+  <figure class="foto foto-larga">
+    <img src="imagens/foto-02.jpg" alt="Descrição: movimento de pessoas na Rua da Imperatriz Teresa Cristina" width="1400" height="933">
+    <figcaption><b>Legenda:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Crédito: Nome.</figcaption>
+  </figure>
+
+  <div class="colunas">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+    <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>
+    <p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.</p>
+  </div>
+
+  <aside class="recorte">
+    <h3>Para entender</h3>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, ut enim ad minim veniam quis nostrud.</p>
+  </aside>
+</section>
+
+<div class="ornamento" aria-hidden="true">
+
+  <svg class="gravura g-sombrinha" viewBox="0 0 120 120"><use href="#g-sombrinha"/></svg>
+</div>
+
+<section class="secao" id="capitulo-3">
+  <div class="secao-cabecalho">
+    <p class="capitulo">Reportagem 3</p>
+    <h2>Rua da Palma</h2>
+    <p class="subtitulo">Bairro de Santo Antônio</p>
+    <hr class="filete-duplo">
+  </div>
+
+  <div class="texto">
+    <p class="abertura">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.</p>
+  </div>
+
+  <div class="galeria">
+    <figure class="foto">
+      <img src="imagens/galeria-01.jpg" alt="Descrição: detalhe de fachada na Rua da Palma" width="600" height="400">
+      <figcaption><b>Foto 1:</b> Legenda da imagem. Crédito: Nome.</figcaption>
+    </figure>
+    <figure class="foto">
+      <img src="imagens/galeria-02.jpg" alt="Descrição: movimento de pedestres na Rua da Palma" width="600" height="400">
+      <figcaption><b>Foto 2:</b> Legenda da imagem. Crédito: Nome.</figcaption>
+    </figure>
+    <figure class="foto">
+      <img src="imagens/galeria-03.jpg" alt="Descrição: comércio em calçada da Rua da Palma" width="600" height="400">
+      <figcaption><b>Foto 3:</b> Legenda da imagem. Crédito: Nome.</figcaption>
+    </figure>
+  </div>
+
+  <div class="texto">
+    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.</p>
+  </div>
+</section>
+
+<div class="ornamento" aria-hidden="true">
+
+  <svg class="gravura g-bonde" viewBox="0 0 240 100"><use href="#g-bonde"/></svg>
+</div>
+
+<section class="secao" id="capitulo-4">
+  <div class="secao-cabecalho">
+    <p class="capitulo">Reportagem 4</p>
+    <h2>Rua da Guia</h2>
+    <p class="subtitulo">Bairro do Recife</p>
+    <hr class="filete-duplo">
+  </div>
+
+  <div class="texto">
+    <p class="abertura">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+    <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore.</p>
+  </div>
+
+  <div class="midia" role="img" aria-label="Espaço reservado para vídeo">
+    <span>[ Espaço reservado para vídeo ou áudio ]<br>Legenda: descrição do conteúdo.</span>
+  </div>
+
+  <div class="texto">
+    <p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.</p>
+  </div>
+</section>
+
+<div class="ornamento" aria-hidden="true">
+
+  <svg class="gravura g-jangada" viewBox="0 0 200 140"><use href="#g-jangada"/></svg>
+</div>
+
+<section class="secao" id="capitulo-5">
+  <div class="secao-cabecalho">
+    <p class="capitulo">Reportagem 5</p>
+    <h2>Rua das Calçadas</h2>
+    <p class="subtitulo">Bairro de São José</p>
+    <hr class="filete-duplo">
+  </div>
+
+  <figure class="foto foto-media">
+    <img src="imagens/foto-03.jpg" alt="Descrição: vista da Rua das Calçadas, no bairro de São José" width="1200" height="800">
+    <figcaption><b>Legenda:</b> Lorem ipsum dolor sit amet. Crédito: Nome.</figcaption>
+  </figure>
+
+  <div class="texto">
+    <p class="abertura">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+    <p>Ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
+  </div>
+
+  <figure class="citacao">
+    <blockquote>“Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis.”</blockquote>
+    <figcaption>Nome do entrevistado</figcaption>
+  </figure>
+</section>
+
+</main>
+
+<footer id="creditos">
+  <svg class="gravura g-faixa gravura-rodape" viewBox="0 0 1200 150" aria-hidden="true"><use href="#g-panorama"/></svg>
+  <h2>Ficha técnica</h2>
+  <p><strong>Reportagem:</strong> Nome do(a) Autor(a)</p>
+  <p><strong>Fotografia:</strong> Nome do(a) Fotógrafo(a)</p>
+  <p><strong>Design e desenvolvimento:</strong> Nome</p>
+  <p><strong>Orientação:</strong> Prof.(a) Nome do(a) Orientador(a)</p>
+  <hr class="filete-fino">
+  <p>Trabalho de Conclusão de Curso — Curso de Jornalismo, Nome da Instituição. Recife, 2026.</p>
+  <p><a href="#topo" style="color:inherit">Voltar ao topo</a></p>
+</footer>
+
+<script>
+(function () {
+
+  var PLACEHOLDER = 'data:image/svg+xml;utf8,' + encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">' +
+    '<rect width="1200" height="800" fill="#d8c59c"/>' +
+    '<g fill="none" stroke="#8c6e4b" stroke-width="3" stroke-dasharray="8 8">' +
+    '<rect x="40" y="40" width="1120" height="720"/><path d="M40 40L1160 760M1160 40L40 760"/></g>' +
+    '<text x="600" y="410" text-anchor="middle" font-family="Courier New, monospace" font-size="42" fill="#6b4a2e">[ imagem ]</text></svg>');
+  document.querySelectorAll('img').forEach(function (img) {
+    img.addEventListener('error', function () {
+      if (img.src !== PLACEHOLDER) { img.src = PLACEHOLDER; }
+    });
+  });
+
+  var painel = document.getElementById('sumario');
+  var veu = document.getElementById('veu');
+  var abrir = document.getElementById('abrirSumario');
+  var fechar = document.getElementById('fecharSumario');
+
+  function alternar(abre) {
+    painel.classList.toggle('aberto', abre);
+    veu.classList.toggle('aberto', abre);
+    abrir.setAttribute('aria-expanded', String(abre));
+    if (abre) { fechar.focus(); } else { abrir.focus(); }
+  }
+  abrir.addEventListener('click', function () { alternar(true); });
+  fechar.addEventListener('click', function () { alternar(false); });
+  veu.addEventListener('click', function () { alternar(false); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && painel.classList.contains('aberto')) { alternar(false); }
+  });
+  painel.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () { alternar(false); });
+  });
+
+  var links = painel.querySelectorAll('li a');
+  var alvos = Array.prototype.map.call(links, function (a) {
+    return document.querySelector(a.getAttribute('href'));
+  });
+  function marcarAtivo() {
+    var pos = window.scrollY + window.innerHeight * 0.35, atual = 0;
+    alvos.forEach(function (el, i) { if (el && el.offsetTop <= pos) { atual = i; } });
+    links.forEach(function (a, i) { a.classList.toggle('ativo', i === atual); });
+  }
+
+  var barra = document.getElementById('progresso');
+  function progresso() {
+    var total = document.documentElement.scrollHeight - window.innerHeight;
+    barra.style.width = (total > 0 ? (window.scrollY / total) * 100 : 0) + '%';
+  }
+  window.addEventListener('scroll', function () { progresso(); marcarAtivo(); }, { passive: true });
+  progresso(); marcarAtivo();
+})();
+</script>
+</body>
+</html>
