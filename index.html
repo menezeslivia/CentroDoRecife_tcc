@@ -177,8 +177,15 @@ figure.foto figcaption {
 figure.foto figcaption b { font-family: var(--f-maquina); font-weight: 400; color: var(--tinta); }
 .foto-larga { max-width: var(--largura-max); }
 .foto-media { max-width: 50rem; }
+/* Foto lateral: só flutua em telas maiores; no celular vira bloco normal.
+   O seletor "figure.foto.foto-lateral" é necessário para vencer a margem
+   "figure.foto { margin: 2.5rem auto }" (sem isso o texto encosta na foto). */
 @media (min-width: 52rem) {
-  .foto-lateral { float: right; width: 18rem; margin: .4rem -6rem 2rem 3rem; }
+  figure.foto.foto-lateral { float: right; width: 16rem; margin: .4rem 0 2rem 2.5rem; }
+  .texto::after { content: ""; display: block; clear: both; }
+}
+@media (min-width: 72rem) {   /* telas grandes: a foto avança um pouco para a margem */
+  figure.foto.foto-lateral { width: 18rem; margin: .4rem -6rem 2rem 3rem; }
 }
 
 .galeria {
